@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Prediction Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Emotion Prediction Chat</h1>
+            <button id="toggle-theme">🌙</button>
+        </div>
+        <div class="chat-box" id="chat-box">
+            {% if error %}
+                <div class="chat-message error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+            {% for msg in messages %}
+                <div class="chat-message user">
+                    <p>{{ msg.text }}</p>
+                    <span class="timestamp">{{ msg.timestamp }}</span>
+                </div>
+                <div class="chat-message bot">
+                    <p><strong>Predicted Emotion:</strong> {{ msg.emotion }}</p>
+                    <p><strong>Probabilities:</strong></p>
+                    <ul>
+                        <li>Sadness: {{ msg.probabilities[0] }}</li>
+                        <li>Joy: {{ msg.probabilities[1] }}</li>
+                        <li>Love: {{ msg.probabilities[2] }}</li>
+                        <li>Anger: {{ msg.probabilities[3] }}</li>
+                        <li>Fear: {{ msg.probabilities[4] }}</li>
+                        <li>Surprise: {{ msg.probabilities[5] }}</li>
+                    </ul>
+                    <span class="timestamp">{{ msg.timestamp }}</span>
+                </div>
+            {% endfor %}
+        </div>
+        <form method="POST" class="chat-input">
+            <textarea name="text" placeholder="Type your message..." rows="1"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
