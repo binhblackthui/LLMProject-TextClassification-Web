@@ -12,31 +12,36 @@
     <div class="chat-container">
         <div class="chat-header">
             <h1>Emotion Prediction Chat</h1>
-            <button id="toggle-theme">🌙</button>
+            <div class="header-buttons">
+                <button id="toggle-theme">🌙</button>
+                <a href="{{ url_for('logout') }}" class="logout-button">Đăng xuất</a>
+            </div>
         </div>
         <div class="chat-box" id="chat-box">
             {% if error %}
                 <div class="chat-message error">
                     <p>{{ error }}</p>
+                    <span class="timestamp">{{ timestamp }}</span>
                 </div>
             {% endif %}
-            {% for msg in messages %}
+            {% for pred in predictions|reverse %}
                 <div class="chat-message user">
-                    <p>{{ msg.text }}</p>
-                    <span class="timestamp">{{ msg.timestamp }}</span>
+                    <p>{{ pred.text }}</p>
+                    <span class="timestamp">{{ pred.timestamp }}</span>
                 </div>
                 <div class="chat-message bot">
-                    <p><strong>Predicted Emotion:</strong> {{ msg.emotion }}</p>
+                    <p><strong>Predicted Emotion:</strong> {{ pred.emotion }}</p>
                     <p><strong>Probabilities:</strong></p>
+                    
                     <ul>
-                        <li>Sadness: {{ msg.probabilities[0] }}</li>
-                        <li>Joy: {{ msg.probabilities[1] }}</li>
-                        <li>Love: {{ msg.probabilities[2] }}</li>
-                        <li>Anger: {{ msg.probabilities[3] }}</li>
-                        <li>Fear: {{ msg.probabilities[4] }}</li>
-                        <li>Surprise: {{ msg.probabilities[5] }}</li>
+                        <li>Sadness: {{ pred.probabilities[0] }}</li>
+                        <li>Joy: {{ pred.probabilities[1] }}</li>
+                        <li>Love: {{ pred.probabilities[2] }}</li>
+                        <li>Anger: {{ pred.probabilities[3] }}</li>
+                        <li>Fear: {{ pred.probabilities[4] }}</li>
+                        <li>Surprise: {{ pred.probabilities[5] }}</li>
                     </ul>
-                    <span class="timestamp">{{ msg.timestamp }}</span>
+                    <span class="timestamp">{{ pred.timestamp }}</span>
                 </div>
             {% endfor %}
         </div>

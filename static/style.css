@@ -15,8 +15,8 @@ body.dark-mode {
 }
 
 .chat-container {
-    width: 90%; /* Tăng chiều rộng lên 90% của màn hình */
-    max-width: 800px; /* Tăng chiều rộng tối đa lên 800px */
+    width: 90%;
+    max-width: 800px;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -43,12 +43,32 @@ body.dark-mode .chat-container {
     align-items: center;
 }
 
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
 .chat-header button {
     background: none;
     border: none;
     color: white;
     font-size: 18px;
     cursor: pointer;
+}
+
+.logout-button {
+    background-color: #dc3545; /* Màu đỏ cho nút đăng xuất */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
 }
 
 .chat-box {
@@ -140,6 +160,7 @@ body.dark-mode .chat-message.bot {
 .prob-chart {
     margin: 10px 0;
     max-width: 100%;
+    height: 100px;
 }
 
 .timestamp {
@@ -224,5 +245,10 @@ body.dark-mode .chat-input textarea {
 
     .prob-chart {
         height: 80px !important;
+    }
+
+    .logout-button {
+        font-size: 12px;
+        padding: 4px 8px;
     }
 }
